@@ -1,0 +1,160 @@
+main{
+  max-width: 1200px;
+  min-width: 900px;
+}
+
+.content a{
+  font-size: 1.5em;
+  text-decoration: none;
+  color: white;
+  opacity: 0.6;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.content a:hover{
+  opacity:1;
+}
+
+#banner{
+  width: 100%;
+  height: 250px;
+  background: #38a6a4;
+  background: linear-gradient(180deg, rgba(56, 166, 164, 1) 0%, rgba(51, 30, 102, 1) 100%);
+}
+
+#banner h1{
+  font-size: 6em;
+  margin: 0;
+  padding-top: 5%;
+  font-family: Lobster;
+  color: white;
+  padding-left: 13%;
+}
+
+#banner p{
+  font-size: 1.3em;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color:rgb(190, 200, 210);
+  padding-left: 6%;
+}
+
+#main-content{
+  display: flex;
+  flex-direction: column;
+  background-color:#331E66;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 40%;
+  margin-top: 5%;
+  border: 1px solid rgb(78, 74, 117);
+  margin-left: 18%;
+  border-radius: 20%;
+  padding-left: 5%;
+  padding-bottom: 5%;
+}
+
+#annoying_code{
+  max-height: 28px;
+}
+
+.content h2{
+  color: white;
+  font-size: 3em;
+}
+
+footer{
+  padding-top: 5%;
+  padding-bottom: 2%;
+  background-color:#331E66;
+}
+
+footer a{
+  font-size: 1.5em;
+  padding-left: 2%;
+  text-decoration: none;
+  color: white;
+}
+
+.star{
+  color: yellow;
+  font-size: 40px;
+  position: fixed;
+  animation: twinkle 10s infinite;
+}
+
+.dots{
+  color: yellow;
+  font-size: 20px;
+  animation: twinkle 12s infinite;
+}
+
+#star1 {
+ bottom: 200px;
+ left: 30px;
+}
+
+#star2{
+  bottom: 300px;
+  left: 550px;
+}
+
+#star3{
+  bottom: 80px;
+  left: 500px;
+}
+
+#star4{
+  bottom: 620px;
+  left: 490px;
+}
+
+#star5{
+  bottom: 450px;
+  left: 70px;
+}
+
+@keyframes twinkle{
+  50% {opacity: 0;}
+}
+
+@media screen and (min-width: 600px){
+  main{
+    background-color:#331E66;
+  }
+  #banner{
+    padding-left: 20%;
+  }
+  .rows{
+    display: flex;
+    margin-right: 15%;;
+  }
+  .content{
+    width: 50%;
+    padding: 5%;
+  }
+  #star1 {
+    bottom: 200px;
+    left: 30px;
+  }
+  #star2{
+    bottom: 300px;
+    left: 1100px;
+  }
+  #star3{
+    bottom: 80px;
+    left: 520px;
+  }
+  #star4{
+    bottom: 400px;
+    left: 590px;
+  }
+  #star5{
+    bottom: 450px;
+    left: 70px;
+  } 
+}
+

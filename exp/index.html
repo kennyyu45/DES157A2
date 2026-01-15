@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 1</title>
+</head>
+<body>
+    <h1>Experiment 1</h1>
+    <h2>To view code happening live, enter inspect mode and click console</h2>
+
+    <script>
+        var message = prompt("Please enter a lower-case message");
+        var newMessage ="";
+
+        for(var i = 0; i<message.length; i++){
+            if(i%2 == 0){
+                newMessage += message[i].toUpperCase();
+            }
+            else{
+                newMessage += message[i]
+            }
+        }
+        console.log(newMessage);
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+
+h1 {
+    text-align: center;
+    padding-top: 15%;
+    color: white;
+    font-size: 50px;
+}
+
+h2{
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}
+
+#badVibes{
+    background: radial-gradient(circle,rgba(145, 35, 68, 1) 0%, rgba(201, 153, 95, 1) 100%);
+}
+
+#goodVibes{
+    background: radial-gradient(circle,rgba(66, 201, 138, 1) 0%, rgba(189, 226, 240, 1) 100%);
+}
+    
+

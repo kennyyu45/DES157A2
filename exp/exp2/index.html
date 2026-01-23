@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 2</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body id = badVibes>
+    <h1>Experiment 2</h1>
+    <h2>That is incorrect, try again</h2>
+
+
+    <script>
+        //the following code takes an input through the prompt, then either displays a lose scoreen, or a win screen with a snack chosen randomly from an array
+       let answer = prompt("What is  (e2ix + e-2ix )/4 + e2ln(sin(x)) + 1/2?");
+
+       var snacks = ["cookie", "lollipop", "ice-cream", "donut"];
+
+       function randNum( ){
+        return snacks[Math.floor(Math.random()*4)]
+       }
+
+       if (answer == 1 || answer == "ONE" || answer == "one"|| answer == "One"){
+            var goodJob = document.querySelector("h2");
+            var vibes = document.querySelector("#badVibes");
+            goodJob.innerHTML = `<p>Good Job!</p><p>Have a ${randNum()}</p>`;
+            vibes.id = "goodVibes";
+       }
+
+    </script>
+    
+</body>
+</html>

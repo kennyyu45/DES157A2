@@ -1,0 +1,91 @@
+body {
+    background-image: url("images/HHouse.png");
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: #341F58;  
+}
+
+html{
+    height: 100%;
+}
+
+#mirror{
+    position: absolute;
+    top: 10px;
+    left: 10%;
+    width: 45%;
+    max-height: 700px;
+}
+
+#tree{
+    position: absolute;
+    width: 15%;
+    top: 470px;
+    left: 480px;
+    z-index: 1;
+}
+
+p, input{
+    font-family: Metamorphous;
+}
+
+form{
+    z-index: 2;
+    position: absolute;
+    top: 150px;
+    left: 310px;
+    font-family: Metamorphous;
+    font-size: 15px;
+}
+
+form input{
+    margin-top: 5%;
+}
+
+
+
+#pageTwo{
+    background-image: url("images/witches.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center top;
+    position: fixed;  
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 5;
+}
+
+#mirrorTwo{
+    position: absolute;
+    top: 10px;
+    left: 45%;
+    width: 50%;
+    max-height: 700px;
+}
+
+#result{
+    position: relative;
+    margin-left: 60%;
+    margin-right: 20%;
+    margin-top: 10%;
+}
+
+.fadeIn{
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+}
+
+.fadeIn.show{
+    opacity: 1;
+    visibility: visible;
+}
+
+

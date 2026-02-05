@@ -2,7 +2,6 @@ body {
     background-image: url("images/HHouse.png");
     background-repeat: no-repeat;
     background-position: center top;
-    background-size: 1200px 750px;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -17,16 +16,16 @@ html{
 
 #mirror{
     position: absolute;
-    top: 30px;
-    left: 200px;
-    width: 590px;
-    height: 700px;
+    top: 10px;
+    left: 10%;
+    width: 45%;
+    max-height: 700px;
 }
 
 #tree{
     position: absolute;
     width: 15%;
-    top: 460px;
+    top: 470px;
     left: 480px;
     z-index: 1;
 }
@@ -38,8 +37,8 @@ p, input{
 form{
     z-index: 2;
     position: absolute;
-    top: 180px;
-    left: 350px;
+    top: 150px;
+    left: 310px;
     font-family: Metamorphous;
     font-size: 15px;
 }
@@ -49,8 +48,9 @@ form input{
 }
 
 
+
 #pageTwo{
-    background-image: url("images/top2.png");
+    background-image: url("images/witches.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center top;
@@ -65,25 +65,16 @@ form input{
 #mirrorTwo{
     position: absolute;
     top: 10px;
-    left: 700px;
-    width: 600px;
-    height: 700px;
+    left: 45%;
+    width: 50%;
+    max-height: 700px;
 }
 
 #result{
     position: relative;
     margin-left: 60%;
     margin-right: 20%;
-    margin-top: 12%;
-    z-index: 10;
-}
-
-#error{
-    font-size: 2em; 
-    color: white;
-    position: absolute;
-    top: 0px;
-    left: 720px;
+    margin-top: 10%;
 }
 
 .fadeIn{
@@ -95,26 +86,6 @@ form input{
 .fadeIn.show{
     opacity: 1;
     visibility: visible;
-}
-
-.witch{
-    position: absolute;
-    height: 100px;
-}
-
-#witch1{
-    top: 200px;
-    left: 350px;
-}
-
-#witch2{
-    top: 500px;
-    left: 300px;
-}
-
-#witch3{
-    top: 300px;
-    left: 450px;
 }
 
 

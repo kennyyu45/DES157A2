@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MadLibs</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Metamorphous&display=swap" rel="stylesheet">
 
     <link href="styles.css" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <main id="page1">
-        <!-- decorations -->
+    <main>
         <img src="images/tree.png" alt="spooky tree" id="tree">
         <img src="images/mirror.png" alt="magic mirror" id="mirror">
 
-        <!-- submission form -->
         <form method="post" action="processor.php">
             <input type="text" id="animal">
             <label for="animal">animals</label><br>
             <input type="text" id="potion">
-            <label for="potion">adjective</label><br>
+            <label for="potion">adj+"ening"</label><br>
             <input type="text" id="loco">
             <label for="loco">location</label><br>
             <input type="text" id="adj">
@@ -31,25 +31,17 @@
             <input type="text" id="adverb">
             <label for="adverb">adverb</label><br>
             <input type="text" id="spell">
-            <label for="spell">verb</label><br>
+            <label for="spell">verb+"ing"</label><br>
             <input type="text" id="salesman">
             <label for="salesman">noun</label><br>
             <input type="submit" id="btn">
         </form>
-
-        <!-- error message -->
-        <p id="error"></p>
     </main>
-
-    <!-- results page -->
     <div id="pageTwo" class="fadeIn">
         <img src="images/mirror.png" alt="magic mirror" id="mirrorTwo">
-        <!-- result -->
-        <p id="result"></p>
-        <!-- witch decorations -->
-        <img src="images/witch.png" alt="witch" class="witch" id="witch1">
-        <img src="images/witch.png" alt="witch" class="witch" id="witch2">
-        <img src="images/witch.png" alt="witch" class="witch" id="witch3">
+        <p id="result">Twas a dark and stormy night, not even the _________ made a peep. Three witches flew out into the night to gather ingredients for a potion of _________. The first witch went to __________ to gather __________. The second witch traversed the _____________ forests to collect the legendary _____________. The last sorrcerific sister cast a spell of _________ ___________ and bartered with a travelling _________ salesman to obtain the final ingredient. Finally, the spell of __________ was casted and the three witches celebrated.</p>
     </div>
+    
 </body>
+
 </html>

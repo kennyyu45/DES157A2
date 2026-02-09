@@ -1,11 +1,12 @@
 main{
     background: linear-gradient(180deg,#D0FFF8 0%, #141456 100%);
     margin-top: 0;
-    padding-left: 5%;
+    padding-bottom: 10%;
 }
 
 header{
     padding-top: 5%;
+    margin-left: 5%;
 }
 
 header h1{
@@ -32,7 +33,7 @@ article{
     margin-top: 10%;
     background-color: rgba(255, 255, 255, 0.5);
     padding: 5%;
-    border-radius: 10%;
+    border-radius: 20%;
     line-height: 1.1em;
 }
 
@@ -40,6 +41,7 @@ article h2{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 2em;
     color: #535F06;
+    line-height: 1em;
 }
 
 article h3{
@@ -55,5 +57,7 @@ article a{
     display: flex;
     flex-direction: row;
     gap: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 

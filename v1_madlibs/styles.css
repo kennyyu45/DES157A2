@@ -63,18 +63,17 @@ form input{
 }
 
 #mirrorTwo{
-    position: absolute;
+    position: relative;
+    background-image: url(images/mirror.png);
+    background-repeat: no-repeat;
     top: 10px;
     left: 45%;
-    width: 50%;
-    max-height: 700px;
-}
-
-#result{
-    position: relative;
-    margin-left: 60%;
-    margin-right: 20%;
-    margin-top: 10%;
+    max-width: 100%;
+    min-width: 29%;
+    height: 200%;
+    padding-top: 200px;
+    padding-left: 150px;
+    padding-right: 700px;
 }
 
 .fadeIn{

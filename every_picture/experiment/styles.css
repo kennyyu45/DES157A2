@@ -1,0 +1,34 @@
+#position{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#outer{
+    background-image: url("dog.avif");
+    min-height: 30vw;
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#inner{
+    background: rgb(57, 255, 139);
+    min-height: 15vw;
+    width: 15vw;
+    transition: transform 1s;
+}
+
+.animate-in{
+    transform: translate(0, 30vw);
+}
+
+.animate-out{
+    transform: translate(0,0vw);
+}
+

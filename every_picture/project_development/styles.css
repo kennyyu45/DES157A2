@@ -1,0 +1,27 @@
+main {
+    display: flex;
+    height: 50vw;
+}
+
+#pics{
+    background-image: url("images/background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60vw;
+    margin: 0;
+}
+
+.hole{
+    width: 30%;
+    height: auto;
+    transition: transform 2s ease-in-out;
+}
+
+.expand{
+    width: 100%;
+}
+
+#one:hover{
+    transform: scale(1.2);
+}

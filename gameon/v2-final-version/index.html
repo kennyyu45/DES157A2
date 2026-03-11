@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game On</title>
+    <script src="script.js" defer></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <h1>C♣RDS</h1>
+    <div id="content">
+        <div>
+            <h2>Score: </h2><h2 id="score">0</h2><br>
+            <h2>Discards: </h2><h2 id="discardDisplay">0</h2><br>
+            <h2>Hands: </h2><h2 id="hands"></h2><br>
+            <h2 id="lastPlayedHand"></h2>
+        </div>
+        <div id="right-side">
+            <h2 id="rules">Rules</h2><br>
+            <h2>Target Score: <span id = "target"></span></h2>
+        </div>
+    </div>
+    <section class="hand">
+    </section>
+    <div id="btns">
+        <h2 id="play">Play</h2>
+        <h2 id="discard">Discard</h2>
+    </div>
+    <div id = explanation class="yeet">
+        <div id="rulesIcons">
+            <h2>Rules</h2> 
+            <h2 id="back">→</h2>
+        </div>
+        <p>Welcome to C♣RDS, a simplified Balatro-like. The rules are simple, just get to 300 points and you win. Earn points by discarding to find the right cards and by playing hands to score. <br>
+
+        At the top left you'll see your score, remaining discards, and remaining hands. Once you reach 0 hands you lose and below is the guide for how much each hand scores. Multiply the mult by the chips to get your score. Good luck! <br><br>
+        
+        <span id="scoringRules"></span>
+        </p>
+    </div>
+    <div id="youLose" class="hidden">
+        <h2>Game Over</h2>
+        <p class="restart">Again?</p>
+    </div>
+    <div id="youWin" class="hidden">
+        <h2>You Win!</h2>
+        <p class="restart">Again?</p>
+    </div>
+    <div id="shop" class="shopGoAway">
+        <h2>Shop</h2>
+        <div id="jokerContainer">
+            <div class="jokers"></div>
+            <div class="jokers"></div>
+            <div class="jokers"></div>
+        </div>
+    </div>
+</body>
+</html>

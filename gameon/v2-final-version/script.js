@@ -2,23 +2,33 @@
 let deck = [];
 const suits = ["♠", "♦", "♥", "♣"];
 let hand = [];
-let winCon = 300;
+let winCon = [300, 450];
 let handLim = 8;
 let selected = 0;
 let discards = 3;
 let hands = 4;
 let playingHand = false;
+let jokerIndex = [1, 2, 3, 4, 5];
+let round = 0;
 //query selectors
 const holding = document.querySelector(".hand");
 const discardBtn = document.querySelector("#discard");
 const playBtn = document.querySelector("#play");
 const rules = document.querySelector("#rules");
 const explanation = document.querySelector("#explanation");
+const scoringRules = document.querySelector("#scoringRules");
 const back = document.querySelector("#back");
 const youLose = document.querySelector("#youLose");
 const redo = document.querySelectorAll(".restart");
+const score = document.querySelector("#score");
+const target = document.querySelector("#target");
+const jokers = document.querySelectorAll(".jokers");
+const shop = document.querySelector("#shop");
+const ding = new Audio("sounds/ding.mp3");
+const lose = new Audio("sounds/fail.mp3");
+const last = document.querySelector("#lastPlayedHand");
 //scoring calculations
-const scoring = {
+let scoring = {
     "fourOfAKind": [60, 7],
     "flush": [35, 4],
     "straight": [30, 4],
@@ -31,33 +41,37 @@ const scoring = {
     "use strict";
     console.log("reading js");
 
+    //start playing!
     startGame();
-
-    //event listeners for restart buttons
-    for (let i = 0; i < redo.length; i++){
-        redo[i].addEventListener("click", function(){
-            deck = [];
-            hand = [];
-            handLim = 8;
-            selected = 0;
-            discards = 3;
-            hands = 4;
-            playingHand = false;
-            score.innerHTML = 0;
-            youLose.classList.add("hidden");
-            youWin.classList.add("hidden");
-            
-            startGame();
-        });
-        };
 })();
 
 function startGame(){
+    //reinitialize all the variables
+    deck = [];
+    hand = [];
+    handLim = 8;
+    selected = 0;
+    discards = 3;
+    hands = 4;
+    playingHand = false;
+
+    //fix some inner HTML
+    //make sure stuff thats hidden stays hidden
+    score.innerHTML = 0;
+    last.innerHTML = "";
+    target.innerHTML = winCon[round];
+    youLose.classList.add("hidden");
+    youWin.classList.add("hidden");
+
+    //display stats
+    //create cards, hand, and deck
+    //initialize shop
     displayStats();
     startDeck();
     draw();   
     makeCards(handLim);
-}
+    generateShop();
+};
 
 function makeCards(handLim){
     //DOM hand
@@ -134,10 +148,10 @@ function startDeck(){
         };
     };
     //randomly shuffles deck
-    shuffle();
+    shuffle(deck);
 };
 
-function shuffle(){
+function shuffle(deck){
     //Fisher-Yates shuffle algorithim
     for (let i = deck.length - 1; i > 0; i--){
         const j = Math.floor(Math.random() * (i + 1));
@@ -175,40 +189,39 @@ function discard(){
     if (selected > 0){
         if(discards > 0 || playingHand === true){
         
-        //targets only cards you chose
-        const chosenCards = document.querySelectorAll(".cards.chosen");
+            //targets only cards you chose
+            const chosenCards = document.querySelectorAll(".cards.chosen");
 
-        for(let i = 0; i < chosenCards.length; i++){
-            //define an index for each card based on its position in the hand
-            const index = parseInt(chosenCards[i].dataset.index);
-            //redefines selected
-            hand[index].selected = true;
-            //animation for discards
-            chosenCards[i].classList.add("flyAway");
+            for(let i = 0; i < chosenCards.length; i++){
+                //define an index for each card based on its position in the hand
+                const index = parseInt(chosenCards[i].dataset.index);
+                //redefines selected
+                hand[index].selected = true;
+                //animation for discards
+                chosenCards[i].classList.add("flyAway");
+            };
+
+            //adds a slight delay (ptherwise its too jarring)
+            setTimeout( function(){
+                //remove all cards from the deck with selected = true
+                hand = hand.filter(card => !card.selected);
+            
+                //draw new cards from deck based on hand size limit
+                draw();
+                makeCards();
+
+                //resets the number of cards you can select
+                selected = 0;
+
+                //updates number of discards
+                displayStats();
+            }, 500);
+
+            //logic to ensure playing a hand doesn't also use a discard
+            if (playingHand === false){
+                discards--;
+            };
         };
-
-        //adds a slight delay (ptherwise its too jarring)
-        setTimeout( function(){
-            //remove all cards from the deck with selected = true
-            hand = hand.filter(card => !card.selected);
-        
-            //draw new cards from deck based on hand size limit
-            draw();
-            makeCards();
-
-            //resets the number of cards you can select
-            selected = 0;
-
-            //updates number of discards
-            displayStats();
-        }, 500);
-
-        //logic to ensure playing a hand doesn't also use a discard
-        if (playingHand === false){
-            discards--;
-        }
-    }
-        
     };
 };
 
@@ -217,16 +230,25 @@ function displayStats(){
     document.querySelector("#hands").innerHTML = hands;
     //updates the number of discards in stats
     document.querySelector("#discardDisplay").innerHTML = discards;
+    //update scoring in the rules with the changes made
+    scoringRules.innerHTML = 
+    `<p>Four of a Kind: <span class="chips">${scoring.fourOfAKind[0]} chips</span>, <span class="mult">${scoring.fourOfAKind[1]} mult</span> <br>
+    Flush: <span class="chips">${scoring.flush[0]} chips</span>, <span class="mult">${scoring.flush[1]} mult</span> <br>
+    Straight: <span class="chips">${scoring.straight[0]} chips</span>, <span class="mult">${scoring.straight[1]} mult</span> <br>
+    Three of a Kind: <span class="chips">${scoring.threeOfAKind[0]} chips</span>, <span class="mult">${scoring.threeOfAKind[1]} mult</span> <br>
+    Pair: <span class="chips">${scoring.pair[0]} chips</span>, <span class="mult">${scoring.pair[1]} mult</span> <br>
+    Single: <span class="chips">${scoring.single[0]} chips</span>, <span class="mult">${scoring.single[1]} mult</span> <br></p>`;
 };
 
 function playHand(){
     const chosenCards = document.querySelectorAll(".cards.chosen");
-    const last = document.querySelector("#lastPlayedHand");
     const score = document.querySelector("#score");
     let cardVals = [];
     let cardSuits = [];
     let mult = 0;
     let chips = 0;
+
+    console.log("hand")
 
     //makes sure when discard() is called later it doesn't update the discards stat
     playingHand = true;
@@ -239,8 +261,6 @@ function playHand(){
             //add all of the card suits to a array
             cardSuits.push(chosenCards[i].dataset.suit)
         }
-
-        console.log(cardVals)
 
         //uses a function to determine the amount of cards in hand that actually score
         numOfScoringCards = scoreValCalc(cardVals)[0];
@@ -302,14 +322,37 @@ function playHand(){
         //resets variable so next discard will update the discards stat
         playingHand = false;
 
-        //checks to see if you win or lose
-        if (currentScore >= winCon){
+        //checks to see if you win
+        //resets scoring
+        if (currentScore >= winCon[round] && round === 1){      
+            ding.play();
             setTimeout( function(){
+                round = 0;
+                scoring = {
+                    "fourOfAKind": [60, 7],
+                    "flush": [35, 4],
+                    "straight": [30, 4],
+                    "threeOfAKind": [30, 3],
+                    "pair": [10, 2],
+                    "single": [5, 1]
+                };
                 winSequence();
             }, 1000);
+            }
+        //see if you move to next round
+        //bring up shop
+        else if (currentScore >= winCon[round]){
+            setTimeout( function(){
+                round += 1;
+                score.innerHTML = 0;
+                ding.play();
+                shop.classList.remove("shopGoAway")
+            }, 1000);
         }
+        //see if you lose
         else if (hands === 0){
             setTimeout( function(){
+                lose.play();
                 loseSequence();
             }, 1000);
         }
@@ -335,15 +378,16 @@ function scoreValCalc(value){
 };
 
 function scoreSuitCalc(value, nums){
-//returns a true or false if the hand is a flush and an integer which adds all the values in the selected hand
     let suitTracker = value[0];
     let flush = 1;
     let adder = 0;
 
+    //tracks total of all values in hand
     for (let i = 0; i  < nums.length; i++){
         adder += parseInt(nums[i])
     }
 
+    //checks if all suits are the same as the first
     for (let i = 1; i < value.length; i++){
         if (suitTracker === value[i]){
             flush++;
@@ -371,10 +415,34 @@ function straightScoring(cardVals){
         if (cardVals[i] + 1 !== cardVals[i + 1]){
             return false
         }
-        else{
-            return [true, adder]
-        }
     }
+    return [true, adder]
+};
+
+function generateShop(){
+    //randomizes jokers
+    shuffle(jokerIndex);
+
+    //pulls three jokers from array
+    //places description of joker effects  
+    for (let i = 0; i < 3; i++){
+        switch (jokerIndex[i]){
+            case 1:
+                jokers[i].innerHTML = "<h2>+5 Mult to Singles</h2>";
+                break;
+            case 2:
+                jokers[i].innerHTML = "<h2>+10 Mult to Straights</h2>";
+                break;
+            case 3:
+                jokers[i].innerHTML = "<h2>+5 Mult to Pairs</h2>";
+                break;
+            case 4:
+                jokers[i].innerHTML = "<h2>+20 chips to Flushes</h2>";
+                break;
+            case 5:
+                jokers[i].innerHTML = "<h2>+20 all to Three of a Kind</h2>";   
+        };
+    };
 };
 
 //event listener for discard button
@@ -392,3 +460,54 @@ rules.addEventListener("click", function(){
 back.addEventListener("click", function(){
     explanation.classList.add("yeet");
 })
+
+//event listeners for jokers in shop
+for (let i = 0; i < jokers.length; i++){
+    jokers[i].addEventListener("click", function(){
+
+        const effect = Number(this.dataset.joker);
+
+        //updates scoring hands based on joker chosen
+        switch(effect){
+            case 1:
+                scoring.single[1] += 5;
+                break;
+            case 2:
+                scoring.straight[1] += 10;
+                break;
+            case 3:
+                scoring.pair[1] += 5;
+                break;
+            case 4:
+                scoring.flush[0] += 20;
+                break;
+            case 5:
+                scoring.threeOfAKind[0] += 20;
+                scoring.threeOfAKind[1] += 20;
+        }
+
+        //removes shop and starts next round
+        shop.classList.add("shopGoAway");
+        startGame();
+    });
+}
+
+//add restart buttons
+for (let i = 0; i < redo.length; i++){
+    redo[i].addEventListener("click", function(){
+        startGame();
+    }
+)};
+
+
+
+
+
+
+
+
+
+
+
+
+
